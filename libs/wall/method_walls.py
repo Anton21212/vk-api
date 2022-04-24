@@ -6,7 +6,7 @@ import requests
 
 # КОНСТАНТЫ
 V = 5.131
-token = "773ba7c6a0ad987fa6fcc841899b6cd81d217e2aac12d30eae7c1dec43512b09ae54b46d2a5598c22ae47"
+token = "token"
 
 
 def wall_post(owner_id, message):
