@@ -13,22 +13,23 @@ import requests
 # &v=5.131
 #
 # access_token=23afa5559213caaff735755293b3c82a4ca51eda24587b32b010b34168ade3f3581ecd87fdbe25880ea01
-def user_ban():
+def user_ban(group_id, owner_id, reason, comment, comment_visible):
     response = requests.post('https://api.vk.com/method/groups.ban',
                              params={
                                  "access_token":
                                      "23afa5559213caaff735755293b3c82a4ca51eda24587b32b010b34168ade3f3581ecd87fdbe25880ea01",
                                  'v': 5.131,
-                                 'group_id': 212871717,
-                                 'owner_id': 352851907,
-                                 'reason': 2,
-                                 'comment': "Так нельзя",
-                                 'comment_visible': 1
+                                 'group_id': group_id,
+                                 'owner_id': owner_id,
+                                 'reason': reason,
+                                 'comment': comment,
+                                 'comment_visible': comment_visible
                              })
 
     data = response.json()
     print(data)
-
+# 212871717
+# 352851907
 
 # class App_adress():
 #
@@ -47,7 +48,6 @@ def user_ban():
 #         z=(data['response']['items'])
 #         for i in z:
 #             self.x=(i['id'])
-
 
 
 #     def get_City(self):
@@ -85,4 +85,3 @@ def user_ban():
 # b = App_adress()
 # b.get_Countries()
 # b.app_adress()
-
