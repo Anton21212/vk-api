@@ -1,1 +1,1 @@
-from . my_exceptions import *
+from . error import *

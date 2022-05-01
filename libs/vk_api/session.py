@@ -1,4 +1,4 @@
-from .wall.method_walls import *
+from .wall.wall_methods import Wall
 
 
 class VkApi():

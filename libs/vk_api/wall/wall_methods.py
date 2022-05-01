@@ -1,14 +1,15 @@
 import requests
+from vk_api import VkApi
 
-from libs.vk_api.decorators_errors import decorator
+from libs.vk_api.decorators_errors import error_checker
 
 
-class Wall:
+class Wall():
     def __init__(self, access_token):
         self.access_token = access_token
 
-    @decorator
-    def post(self, owner_id: int, message: str, *, friends_only=0, from_group=0) -> dict:
+    @error_checker
+    def post(self, owner_id: int, message: str, *, friends_only: int = 0, from_group: int = 0) -> dict:
         """
         Позволяет создать запись на стене
 
@@ -36,6 +37,7 @@ class Wall:
         data = response.json()
         return data
 
+    @error_checker
     def check_copyright_link(self, link: str) -> dict:
         """
         Проверка ссылки для указания источника
@@ -53,6 +55,7 @@ class Wall:
         data = response.json()
         return data
 
+    @error_checker
     def close_comments(self, owner_id: int, post_id: int) -> dict:
         """
         Выключает комментирование записи
@@ -73,8 +76,9 @@ class Wall:
         data = response.json()
         return data
 
+    @error_checker
     def create_comment(self, owner_id: int, post_id: int, message: str, reply_to_comment: int, *,
-                       sticker_id=None) -> dict:
+                       sticker_id: int = None) -> dict:
         """
         Создание коммента к записи
 
@@ -101,6 +105,7 @@ class Wall:
         data = response.json()
         return data
 
+    @error_checker
     def delete(self, owner_id: int, post_id: int) -> dict:
         """
         Удаляет запись со стены.
@@ -122,6 +127,7 @@ class Wall:
         data = response.json()
         return data
 
+    @error_checker
     def delete_comment(self, owner_id: int, comment_id: int) -> dict:
         """
         Удаляет комментарий к записи на стене.
@@ -143,6 +149,7 @@ class Wall:
         data = response.json()
         return data
 
+    @error_checker
     def edit(self, owner_id: int, post_id: int, friends_only: int, message: str, close_comments: int) -> dict:
         """
         Редактирует запись на стене.
@@ -171,6 +178,7 @@ class Wall:
         data = response.json()
         return data
 
+    @error_checker
     def edit_comment(self, owner_id: int, comment_id: int, message: str) -> dict:
         """
         Редактирует комментарий на стене.
@@ -194,7 +202,8 @@ class Wall:
         data = response.json()
         return data
 
-    def get(self, owner_id: int, count: int, filter: str, *, offset=None, domain=None) -> dict:
+    @error_checker
+    def get(self, owner_id: int, count: int, filter: str, *, offset: int = None, domain: str = None) -> dict:
         """
         Возвращает список записей со стены пользователя или сообщества.
 
@@ -224,6 +233,7 @@ class Wall:
         data = response.json()
         return data
 
+    @error_checker
     def get_by_id(self, posts: tuple[int]) -> dict:
         """
         Возвращает список записей со стен пользователей или сообществ по их идентификаторам.
@@ -244,6 +254,7 @@ class Wall:
         data = response.json()
         return data
 
+    @error_checker
     def get_comment(self, owner_id: int, comment_id: int) -> dict:
         """
         Получает информацию о комментарии на стене.
@@ -266,9 +277,11 @@ class Wall:
         data = response.json()
         return data
 
-    def get_comments(self, owner_id: int, post_id: int, sort: str, start_comment_id: int, comment_id: int, *, count=10,
-                     offset=None,
-                     need_likes=0) -> dict:
+    @error_checker
+    def get_comments(self, owner_id: int, post_id: int, sort: str, start_comment_id: int, comment_id: int, *,
+                     count: int = 10,
+                     offset: int = None,
+                     need_likes: int = 0) -> dict:
         """
         Возвращает список комментариев к записи на стене.
 
@@ -303,7 +316,8 @@ class Wall:
         data = response.json()
         return data
 
-    def get_reposts(self, owner_id: int, post_id: int, count: int, *, offset=None) -> dict:
+    @error_checker
+    def get_reposts(self, owner_id: int, post_id: int, count: int, *, offset: int = None) -> dict:
         """
         Позволяет получать список репостов заданной записи.
 
@@ -328,6 +342,7 @@ class Wall:
         data = response.json()
         return data
 
+    @error_checker
     def open_comments(self, owner_id: int, post_id: int) -> dict:
         """
         Включает комментирование записи
@@ -349,6 +364,7 @@ class Wall:
         data = response.json()
         return data
 
+    @error_checker
     def pin(self, owner_id: int, post_id: int) -> dict:
         """
         Закрепляет запись на стене (запись будет отображаться выше остальных).
@@ -370,6 +386,7 @@ class Wall:
         data = response.json()
         return data
 
+    @error_checker
     def report_comment(self, owner_id: int, comment_id: int, reason: int) -> dict:
         """
         Позволяет пожаловаться на комментарий к записи.
@@ -401,6 +418,7 @@ class Wall:
         data = response.json()
         return data
 
+    @error_checker
     def report_post(self, owner_id: int, post_id: int, reason: int) -> dict:
         """
         Позволяет пожаловаться на запись
@@ -432,7 +450,8 @@ class Wall:
         data = response.json()
         return data
 
-    def repost(self, object: str, message: str, group_id: id, *, mark_as_ads=0) -> dict:
+    @error_checker
+    def repost(self, object: str, message: str, group_id: id, *, mark_as_ads: int = 0) -> dict:
         """
         Копирует объект на стену пользователя или сообщества.
 
@@ -459,6 +478,7 @@ class Wall:
         data = response.json()
         return data
 
+    @error_checker
     def restore(self, owner_id: int, post_id: int) -> dict:
         """
         Восстанавливает удалённую запись на стене пользователя или сообщества.
@@ -481,6 +501,7 @@ class Wall:
         data = response.json()
         return data
 
+    @error_checker
     def restore_comment(self, owner_id: int, comment_id: int) -> dict:
         """
         Восстанавливает удаленный комментарий к записи на стене.
@@ -503,7 +524,9 @@ class Wall:
         data = response.json()
         return data
 
-    def search(self, owner_id: int, query: str, *, domain, count=20, owners_only=0, offset=None) -> dict:
+    @error_checker
+    def search(self, owner_id: int, query: str, *, domain: str, count: int = 20, owners_only: int = 0,
+               offset: int = None) -> dict:
         """
         Позволяет искать записи на стене в соответствии с заданными критериями.
 
@@ -533,6 +556,7 @@ class Wall:
         data = response.json()
         return data
 
+    @error_checker
     def unpin(self, owner_id: int, post_id: int) -> dict:
         """
         Отменяет закрепление записи на стене.
