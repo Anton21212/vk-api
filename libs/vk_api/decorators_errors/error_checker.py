@@ -1,4 +1,4 @@
-from libs.vk_api.exceptions import *
+from ..error import *
 
 
 def error_checker(func):
@@ -7,7 +7,7 @@ def error_checker(func):
         result = func(*args, **kwargs)
         if 'response' in result:
             print("OK")
-        elif result['error']['error_code'] ==214:
+        elif result['error']['error_code'] == 214:
             raise AccessToAddingPostDenied
         elif result['error']['error_code'] == 1:
             raise UnknownErrorHasOccurred
