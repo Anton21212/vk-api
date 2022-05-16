@@ -1,1 +1,1 @@
-from . wall_methods import Wall
+from .wall_methods import Wall

@@ -1,190 +1,200 @@
-class UnknownErrorHasOccurred(BaseException):
+class VkAPIError(Exception):
+    def __init__(self, error_code: int = None, error_msg: str = None, error_request_params: dict = None):
+        self.error_code = error_code
+        self.error_msg = error_msg
+        self.error_request_params = error_request_params
+
+    def __str__(self):
+        return f"{self.error_request_params}, {self.error_msg}, {self.error_code}"
+
+
+class UnknownErrorHasOccurred(VkAPIError):
     pass
 
 
-class TheApplicationIsDisabled(BaseException):
+class TheApplicationIsDisabled(VkAPIError):
     pass
 
 
-class UnknownMethodPassed(BaseException):
+class UnknownMethodPassed(VkAPIError):
     pass
 
 
-class InvalidSignature(BaseException):
+class InvalidSignature(VkAPIError):
     pass
 
 
-class UserAuthorizationFailed(BaseException):
+class UserAuthorizationFailed(VkAPIError):
     pass
 
 
-class TooManyRequestsPerSecond(BaseException):
+class TooManyRequestsPerSecond(VkAPIError):
     pass
 
 
-class YouDoNotHavePermissionToPerformThisAction(BaseException):
+class YouDoNotHavePermissionToPerformThisAction(VkAPIError):
     pass
 
 
-class InvalidRequest(BaseException):
+class InvalidRequest(VkAPIError):
     pass
 
 
-class TooManySimilarActions(BaseException):
+class TooManySimilarActions(VkAPIError):
     pass
 
 
-class AnInternalServerErrorHasOccurred(BaseException):
+class AnInternalServerErrorHasOccurred(VkAPIError):
     pass
 
 
-class InTestModeTheApplicationMustBeTurnedOffOrTheUserMustBeLoggedIn(BaseException):
+class InTestModeTheApplicationMustBeTurnedOffOrTheUserMustBeLoggedIn(VkAPIError):
     pass
 
 
-class YouNeedToEnterTheCodeFromTheImageCaptcha(BaseException):
+class YouNeedToEnterTheCodeFromTheImageCaptcha(VkAPIError):
     pass
 
 
-class AccessIsDenied(BaseException):
+class AccessIsDenied(VkAPIError):
     pass
 
 
-class RequestsMustBeMadeOverHTTPSBecauseTheUserHasEnabledASettingThatRequiresWorkOverASecureConnection(BaseException):
+class RequestsMustBeMadeOverHTTPSBecauseTheUserHasEnabledASettingThatRequiresWorkOverASecureConnection(VkAPIError):
     pass
 
 
-class UserValidationRequired(BaseException):
+class UserValidationRequired(VkAPIError):
     pass
 
 
-class ThePageHasBeenRemovedOrBlocked(BaseException):
+class ThePageHasBeenRemovedOrBlocked(VkAPIError):
     pass
 
 
-class ThisActionIsProhibitedForNonStandaloneApplications(BaseException):
+class ThisActionIsProhibitedForNonStandaloneApplications(VkAPIError):
     pass
 
 
-class ThisActionIsAllowedOnlyForStandaloneAndOpenAPIApplications(BaseException):
+class ThisActionIsAllowedOnlyForStandaloneAndOpenAPIApplications(VkAPIError):
     pass
 
 
-class TheMethodHasBeenDisabled(BaseException):
+class TheMethodHasBeenDisabled(VkAPIError):
     pass
 
 
-class UserConfirmationRequired(BaseException):
+class UserConfirmationRequired(VkAPIError):
     pass
 
 
-class TheCommunityAccessKeyIsInvalid(BaseException):
+class TheCommunityAccessKeyIsInvalid(VkAPIError):
     pass
 
 
-class TheApplicationAccessKeyIsInvalid(BaseException):
+class TheApplicationAccessKeyIsInvalid(VkAPIError):
     pass
 
 
-class QuantityLimitPerMethodCallReached(BaseException):
+class QuantityLimitPerMethodCallReached(VkAPIError):
     pass
 
 
-class ProfileIsPrivate(BaseException):
+class ProfileIsPrivate(VkAPIError):
     pass
 
 
-class OneOfTheRequiredParametersWasNotPassedOrIsInvalid(BaseException):
+class OneOfTheRequiredParametersWasNotPassedOrIsInvalid(VkAPIError):
     pass
 
 
-class InvalidApplicationAPIID(BaseException):
+class InvalidApplicationAPIID(VkAPIError):
     pass
 
 
-class InvalidUserID(BaseException):
+class InvalidUserID(VkAPIError):
     pass
 
 
-class InvalidTimestamp(BaseException):
+class InvalidTimestamp(VkAPIError):
     pass
 
 
-class AlbumAccessDenied(BaseException):
+class AlbumAccessDenied(VkAPIError):
     pass
 
 
-class AudioAccessDenied(BaseException):
+class AudioAccessDenied(VkAPIError):
     pass
 
 
-class GroupAccessDenied(BaseException):
+class GroupAccessDenied(VkAPIError):
     pass
 
 
-class AlbumFull(BaseException):
+class AlbumFull(VkAPIError):
     pass
 
 
-class ActionDeniedYouMustEnableVoiceTranslationsInTheAppSettings(BaseException):
+class ActionDeniedYouMustEnableVoiceTranslationsInTheAppSettings(VkAPIError):
     pass
 
 
-class NoRightsToPerformTheseOperationsWithTheAdvertisingAccount(BaseException):
+class NoRightsToPerformTheseOperationsWithTheAdvertisingAccount(VkAPIError):
     pass
 
 
-class AnErrorOccurredWhileWorkingWithTheAdvertisingAccount(BaseException):
+class AnErrorOccurredWhileWorkingWithTheAdvertisingAccount(VkAPIError):
     pass
 
 
-class SpecifiedLinkIsIncorrectCantFindSource(BaseException):
+class SpecifiedLinkIsIncorrectCantFindSource(VkAPIError):
     pass
 
 
-class AccessToPostCommentsDenied(BaseException):
+class AccessToPostCommentsDenied(VkAPIError):
     pass
 
 
-class AccessToStatusRepliesDenied(BaseException):
+class AccessToStatusRepliesDenied(VkAPIError):
     pass
 
 
-class HyperlinksAreForbidden(BaseException):
+class HyperlinksAreForbidden(VkAPIError):
     pass
 
 
-class TooManyReplies(BaseException):
+class TooManyReplies(VkAPIError):
     pass
 
 
-class AccessToWallsPostDenied(BaseException):
+class AccessToWallsPostDenied(VkAPIError):
     pass
 
 
-class AccessToWallsCommentDenied(BaseException):
+class AccessToWallsCommentDenied(VkAPIError):
     pass
 
 
-class TooManyAdsPosts(BaseException):
+class TooManyAdsPosts(VkAPIError):
     pass
 
 
-class DonutIsDisabled(BaseException):
+class DonutIsDisabled(VkAPIError):
     pass
 
 
-class ContentBlocked(BaseException):
+class ContentBlocked(VkAPIError):
     pass
 
 
-class AccessToAddingPostDenied(BaseException):
+class AccessToAddingPostDenied(VkAPIError):
     pass
 
 
-class AdvertisementPostWasRecentlyAdded(BaseException):
+class AdvertisementPostWasRecentlyAdded(VkAPIError):
     pass
 
 
-class TooManyRecipients(BaseException):
+class TooManyRecipients(VkAPIError):
     pass

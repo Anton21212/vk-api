@@ -1,15 +1,16 @@
 import requests
-from vk_api import VkApi
+
 
 from libs.vk_api.decorators_errors import error_checker
 
 
-class Wall():
+class Wall:
     def __init__(self, access_token):
         self.access_token = access_token
+        self.v = 5.131
 
     @error_checker
-    def post(self, owner_id: int, message: str, *, friends_only: int = 0, from_group: int = 0) -> dict:
+    def post(self, owner_id: int, message: str, friends_only: int = 0, from_group: int = 0) -> dict:
         """
         Позволяет создать запись на стене
 
@@ -24,9 +25,9 @@ class Wall():
 
         response = requests.post(
             url='https://api.vk.com/method/wall.post',
-            params={
+            data={
                 'access_token': self.access_token,
-                'v': 5.131,
+                'v': self.v,
                 'owner_id': owner_id,
                 'friends_only': friends_only,
                 'from_group': from_group,
@@ -47,9 +48,9 @@ class Wall():
 
         response = requests.post(
             url="https://api.vk.com/method/wall.checkCopyrightLink",
-            params={
+            data={
                 'access_token': self.access_token,
-                'v': 5.131,
+                'v': self.v,
                 'link': link,
             })
         data = response.json()
@@ -67,10 +68,10 @@ class Wall():
 
         response = requests.post(
             url="https://api.vk.com/method/wall.closeComments",
-            params={
+            data={
                 'access_token': self.access_token,
-                'v': 5.131,
-                'owner_id': -owner_id,
+                'v': self.v,
+                'owner_id': owner_id,
                 'post_id': post_id,
             })
         data = response.json()
@@ -92,10 +93,10 @@ class Wall():
 
         response = requests.post(
             url="https://api.vk.com/method/wall.createComment",
-            params={
+            data={
                 'access_token': self.access_token,
-                'v': 5.131,
-                'owner_id': -owner_id,
+                'v': self.v,
+                'owner_id': owner_id,
                 'post_id': post_id,
                 'message': message,
                 "reply_to_comment": reply_to_comment,
@@ -117,10 +118,10 @@ class Wall():
 
         response = requests.post(
             url="https://api.vk.com/method/wall.delete",
-            params={
+            data={
                 'access_token': self.access_token,
-                'v': 5.131,
-                'owner_id': -owner_id,
+                'v': self.v,
+                'owner_id': owner_id,
                 'post_id': post_id,
             }
         )
@@ -139,10 +140,10 @@ class Wall():
 
         response = requests.post(
             url="https://api.vk.com/method/wall.deleteComment",
-            params={
+            data={
                 'access_token': self.access_token,
-                'v': 5.131,
-                'owner_id': -owner_id,
+                'v': self.v,
+                'owner_id': owner_id,
                 'comment_id': comment_id,
             }
         )
@@ -165,10 +166,10 @@ class Wall():
 
         response = requests.post(
             url="https://api.vk.com/method/wall.edit",
-            params={
+            data={
                 'access_token': self.access_token,
-                'v': 5.131,
-                'owner_id': -owner_id,
+                'v': self.v,
+                'owner_id': owner_id,
                 'post_id': post_id,
                 'friends_only': friends_only,
                 'message': message,
@@ -191,10 +192,10 @@ class Wall():
 
         response = requests.post(
             url="https://api.vk.com/method/wall.editComment",
-            params={
+            data={
                 'access_token': self.access_token,
-                'v': 5.131,
-                'owner_id': -owner_id,
+                'v': self.v,
+                'owner_id': owner_id,
                 'comment_id': comment_id,
                 'message': message,
             }
@@ -203,7 +204,7 @@ class Wall():
         return data
 
     @error_checker
-    def get(self, owner_id: int, count: int, filter: str, *, offset: int = None, domain: str = None) -> dict:
+    def get(self, count: int, filter: str, *, offset: int = None, domain: str = None, owner_id: int = None) -> dict:
         """
         Возвращает список записей со стены пользователя или сообщества.
 
@@ -222,8 +223,8 @@ class Wall():
             url="https://api.vk.com/method/wall.get",
             params={
                 'access_token': self.access_token,
-                'v': 5.131,
-                'owner_id': -owner_id,
+                'v': self.v,
+                'owner_id': owner_id,
                 'count': count,
                 'filter': filter,
                 'offset': offset,
@@ -231,6 +232,7 @@ class Wall():
             }
         )
         data = response.json()
+        print(data)
         return data
 
     @error_checker
@@ -247,7 +249,7 @@ class Wall():
             url="https://api.vk.com/method/wall.getById",
             params={
                 'access_token': self.access_token,
-                'v': 5.131,
+                'v': self.v,
                 'posts': posts,
             }
         )
@@ -268,7 +270,7 @@ class Wall():
             url="https://api.vk.com/method/wall.getComment",
             params={
                 'access_token': self.access_token,
-                'v': 5.131,
+                'v': self.v,
                 'owner_id': owner_id,
                 'comment_id': comment_id,
 
@@ -302,7 +304,7 @@ class Wall():
             url="https://api.vk.com/method/wall.getComments",
             params={
                 'access_token': self.access_token,
-                'v': 5.131,
+                'v': self.v,
                 'owner_id': owner_id,
                 'post_id': post_id,
                 'need_likes': need_likes,
@@ -332,7 +334,7 @@ class Wall():
             url="https://api.vk.com/method/wall.getReposts",
             params={
                 'access_token': self.access_token,
-                'v': 5.131,
+                'v': self.v,
                 'owner_id': owner_id,
                 'post_id': post_id,
                 'count': count,
@@ -354,9 +356,9 @@ class Wall():
 
         response = requests.post(
             url="https://api.vk.com/method/wall.openComments",
-            params={
+            data={
                 'access_token': self.access_token,
-                'v': 5.131,
+                'v': self.v,
                 'owner_id': owner_id,
                 'post_id': post_id,
             }
@@ -376,9 +378,9 @@ class Wall():
 
         response = requests.post(
             url="https://api.vk.com/method/wall.pin",
-            params={
+            data={
                 'access_token': self.access_token,
-                'v': 5.131,
+                'v': self.v,
                 'owner_id': owner_id,
                 'post_id': post_id,
             }
@@ -407,9 +409,9 @@ class Wall():
 
         response = requests.post(
             url="https://api.vk.com/method/wall.reportComment",
-            params={
+            data={
                 'access_token': self.access_token,
-                'v': 5.131,
+                'v': self.v,
                 'owner_id': owner_id,
                 'comment_id': comment_id,
                 'reason': reason,
@@ -439,9 +441,9 @@ class Wall():
 
         response = requests.post(
             url="https://api.vk.com/method/wall.reportPost",
-            params={
+            data={
                 'access_token': self.access_token,
-                'v': 5.131,
+                'v': self.v,
                 'owner_id': owner_id,
                 'post_id': post_id,
                 'reason': reason,
@@ -466,9 +468,9 @@ class Wall():
 
         response = requests.post(
             url="https://api.vk.com/method/wall.repost",
-            params={
+            data={
                 'access_token': self.access_token,
-                'v': 5.131,
+                'v': self.v,
                 'object': object,
                 'message': message,
                 'group_id': group_id,
@@ -491,9 +493,9 @@ class Wall():
 
         response = requests.post(
             url="https://api.vk.com/method/wall.restore",
-            params={
+            data={
                 'access_token': self.access_token,
-                'v': 5.131,
+                'v': self.v,
                 'owner_id': owner_id,
                 'post_id': post_id,
             }
@@ -514,9 +516,9 @@ class Wall():
 
         response = requests.post(
             url="https://api.vk.com/method/wall.restoreComment",
-            params={
+            data={
                 'access_token': self.access_token,
-                'v': 5.131,
+                'v': self.v,
                 'owner_id': owner_id,
                 'comment_id': comment_id,
             }
@@ -542,9 +544,9 @@ class Wall():
 
         response = requests.post(
             url="https://api.vk.com/method/wall.search",
-            params={
+            data={
                 'access_token': self.access_token,
-                'v': 5.131,
+                'v': self.v,
                 'owner_id': owner_id,
                 'query': query,
                 'owners_only': owners_only,
@@ -568,12 +570,14 @@ class Wall():
 
         response = requests.post(
             url="https://api.vk.com/method/wall.unpin",
-            params={
+            data={
                 'access_token': self.access_token,
-                'v': 5.131,
+                'v': self.v,
                 'owner_id': owner_id,
                 'post_id': post_id,
             }
         )
         data = response.json()
         return data
+
+
