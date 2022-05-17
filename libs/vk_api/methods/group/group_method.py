@@ -11,7 +11,7 @@ class Group:
     @error_checker
     def get_members(self, group_id: int, sort: str, count: int, offset: int = 0, filter: str = None) -> dict:
         """
-        Позволяет создать запись на стене
+        Возвращает список участников сообщества
 
         :param group_id: Идентификатор или короткое имя сообщества.
         :param sort: Сортировка, с которой необходимо вернуть список участников. Может принимать значения:
