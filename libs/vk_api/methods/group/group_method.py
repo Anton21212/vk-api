@@ -114,3 +114,46 @@ class Group:
         data = response.json()
         print(data)
         return data
+
+    def get_by_id(self, group_id: str, fields: str) -> dict:
+        """
+        Возвращает информацию о заданном сообществе или о нескольких сообществах.
+
+        :param group_id: Идентификатор или короткое имя сообщества.
+        :param fields: Список дополнительных полей, которые необходимо вернуть. Например:
+
+        •   activity;
+        •   ban_info;
+        •   can_post;
+        •   can_see_all_posts;
+        •   city;
+        •   contacts;
+        •   counters;
+        •   country;
+        •   cover;
+        •   description;
+        •   finish_date;
+        •   fixed_post;
+        •   links;
+        •   market;
+        •   members_count;
+        •   place;
+        •   site;
+        •   start_date;
+        •   status;
+        •   verified;
+        •   wiki_page.
+        """
+
+        response = requests.get(
+            url='https://api.vk.com/method/groups.getById',
+            params={
+                'access_token': self.access_token,
+                'v': self.v,
+                'group_id': group_id,
+                'fields' : fields
+            }
+        )
+
+        data = response.json()
+        return data
